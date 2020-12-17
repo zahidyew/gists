@@ -1,0 +1,16 @@
+{
+  "name": "gists",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dateFormatter.js",
+  "scripts": {
+    "date": "nodemon dateFormatter.js",
+    "start": "nodemon ./training/palindrome.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
