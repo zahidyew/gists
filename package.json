@@ -5,7 +5,9 @@
   "main": "dateFormatter.js",
   "scripts": {
     "date": "nodemon dateFormatter.js",
-    "start": "nodemon ./training/palindrome.js"
+    "start": "nodemon ./training/palindrome.js",
+    "test": "nodemon reformat.js",
+    "train": "nodemon train.js"
   },
   "keywords": [],
   "author": "",
