@@ -93,10 +93,6 @@ function fizzBuzz() {
    }
 }
 
-const lists = [3, 1, 7, 0, 17, 1]
-//console.log(lists)
-
-
 function ascending(arr) {
    // BUBBLE SORT
    // do x amount of iterations, where x = array.length
@@ -126,8 +122,12 @@ function ascending(arr) {
    return arr
 }
 
+const lists = [3, 1, 7, 0, 17, 1]
+const output = ascending(lists)
+console.log(output)
+
 // return the largest Binary Gap for a N number
-function binaryGap(N) {
+/* function binaryGap(N) {
    N = parseInt(N)
    if (N > 0 && N <= 2147483647) {
       const binaryForm = N.toString(2)
@@ -136,6 +136,8 @@ function binaryGap(N) {
       let gaps = []
       let counter = 0
       let flag = false
+
+      //console.log(binaryForm)
       
       for (let i = 0; i < length; i++) {
          if (arr[i] == 1) {
@@ -163,8 +165,58 @@ function binaryGap(N) {
    } else {
       return 0
    }
+} */
+
+/* function cyclicRotation(A, K) {
+   for (let i = 1; i <= K; i++) {
+      A = moveArray(A)
+   }
+   console.log(A)
 }
 
-const output = binaryGap(529)
+function moveArray(array) {
+   const lastIndex = array.length - 1
+   const arry = array.slice()
 
-console.log(output)
+   for (let i = 0; i <= lastIndex; i++) {
+      if (i == lastIndex) {
+         array[0] = arry[i]
+      } else {
+         array[i + 1] = arry[i]
+      }
+   }
+   return array
+}  */
+
+/* function oddOccurencesInArray(A) {
+   let repeat = Math.floor(A.length / 2)
+   let counter = 1
+
+   for (let i = 0; i < A.length; i++) {
+      if (A.length == 1) {
+         break
+      }
+      //console.log(A[i])
+      //console.log('i is ' + i)
+      
+      for (let j = i + 1; j < A.length; j++) {
+         //console.log(j)
+         if (A[i] == A[j]) {
+            // console.log(i + ' ' + A[i] + ' == ' + j + ' ' + A[j])
+            console.log(A[i] + ' == ' + A[j])
+            A.splice(j, 1)
+            A.splice(i, 1)
+            i = -1
+            j = 0
+            //repeat-- 
+            //console.log(A)
+            //console.log('repeat is ' + repeat)
+            break
+         }
+      }
+      console.log('Counter: ' + counter)
+      counter++
+   }
+
+   return A.toString()
+} */
