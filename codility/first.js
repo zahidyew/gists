@@ -202,10 +202,50 @@ function maxCounters(N, A) {
    return counters
 }
 
+
+// Lesson 4, Q3: Find the smallest positive integer that does not occur in a given sequence.
+function missingInteger(nums) {
+   for (let i = 1; i <= nums.length; i++) {
+      // check whether the numbers 1,2,..until nums.length exist in the sequence. If not found, by default i is the answer. So return i
+      if (nums.indexOf(i) == -1) {
+         return i
+      } 
+      // if all numbers 1,2,..until nums.length exist in the sequence. Then, answer must be i + 1.
+      else if (i == nums.length) {
+         return i + 1
+      }
+   }
+   return ('something wrong with input given')
+}
+
+
+// Lesson 4, Q4: Check whether array A is a permutation.
+function permCheck(nums) {
+   nums = nums.sort()
+   let flag 
+   
+   for (let i = 0; i < nums.length; i++) {
+      if (nums[i] != i + 1) {
+         return 0
+      } else {
+         flag = 1  
+      }
+   }
+
+   return flag
+}
+
 // const output = oddOccurencesInArray([9, 3, 9, 3, 9, 7, 9])
 // const output = minimalJump(10, 85, 30)
 // const output = permMissingElem([2,3,1,5])
 // const output = tapeEquilibrium([3,1,2,4,3])
 // const output = frogRiverOne(5, [1,3,1,4,2,3,5,4])
-const output = maxCounters(5, [3,4,4,6,1,4,4])
+// const output = maxCounters(5, [3,4,4,6,1,4,4])
+
+/* const arrayList = [-1, -3] // [1, 2, 3] //[1, 3, 6, 4, 1, 2]
+const output = missingInteger(arrayList) */
+
+const arrayList = [4, 1, 3]  //[4,1,3,2] // [4,1,3] 
+const output = permCheck(arrayList)
+
 console.log(output)
