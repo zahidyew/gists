@@ -110,6 +110,102 @@ function minimalJump(X, Y, D) {
    return jumps
 }
 
+
+// Lesson 3, Q2: Find the missing element in a given permutation.
+function permMissingElem(A) {
+   if (A.length == 0) {
+      return 0
+   }
+   A = A.sort()
+
+   for (let i = 0; i < A.length; i++) {
+      if (A[i] != i + 1) {
+         return i + 1
+      }
+   } 
+   return A 
+
+   // another way of solving, this one using algebra
+   /* const N = A.length
+   return (((N + 1) * ((N + 1) + 1) / 2) - A.reduce((a,b) => {return a+b})) */
+}
+
+
+// Lesson 3, Q3: Minimize the value |(A[0] + ... + A[P-1]) - (A[P] + ... + A[N-1])
+function tapeEquilibrium(A) {
+   let difference = []
+
+   for (let i = 0; i < A.length - 1; i++) {
+      let split1 = A.slice(0, i + 1).reduce((a , b) => a + b)
+      let split2 = A.slice(i + 1).reduce((a, b) => a + b) 
+
+      difference.push(Math.abs(split1 - split2))
+      //console.log(difference)
+   }
+
+   return Math.min(...difference)
+}
+
+// Lesson 4, Q1: Find the earliest time when a frog can jump to the other side of a river.
+function frogRiverOne(X, A) {
+   return A.indexOf(X)
+   
+   /* let canCross = false
+   let i = -1
+
+   while (!canCross) {
+      if (i == A.length) {
+         return i = -1
+      }
+      i++
+      //console.log(i + ": " + A[i])
+      if (X == A[i]) {
+         canCross = true
+         return i
+      }
+   }  */
+
+   /* let i = 0
+   while (!canCross) {
+      console.log(i + ": " + A[i])
+      if (X == A[i]) {
+         canCross = true
+         break
+      }
+      i++
+   }  */
+
+   // return i
+}
+
+
+// Lesson 4, Q2: Calculate the values of counters after applying all alternating operations: increase counter by 1; set value of all counters to current maximum.
+function maxCounters(N, A) {
+   // let counters = Array.from({ length: N }, () => 0);
+   let counters = Array(N).fill(0)
+
+   for (let i = 0; i < A.length; i++) {
+      /* if (A[i] < 1) {   
+         
+      } */
+      if (A[i] < N) {
+         counters[A[i] - 1]++ // -1 as array index starts at 0
+      }
+      else { // the element is bigger than N, so we have to set all the counters to the largest counter
+         let largest = Math.max(...counters)
+         counters.fill(largest)
+      }
+      /* console.log(A[i])
+      console.log(counters) */
+   }
+
+   return counters
+}
+
 // const output = oddOccurencesInArray([9, 3, 9, 3, 9, 7, 9])
-const output = minimalJump(10, 85, 30)
+// const output = minimalJump(10, 85, 30)
+// const output = permMissingElem([2,3,1,5])
+// const output = tapeEquilibrium([3,1,2,4,3])
+// const output = frogRiverOne(5, [1,3,1,4,2,3,5,4])
+const output = maxCounters(5, [3,4,4,6,1,4,4])
 console.log(output)
