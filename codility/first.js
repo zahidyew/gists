@@ -235,6 +235,27 @@ function permCheck(nums) {
    return flag
 }
 
+
+// Lesson 5, Q4: Count the number of passing cars on the road
+function passingCars(arry) {
+   let passing = 0
+   const length = arry.length
+
+   for (let i = 0; i < length; i++) {
+      if (passing > 1000000000) {
+         return -1
+      }
+      if (arry[i] == 0) {
+         for (let j = i + 1; j < length; j++) {
+            if (arry[j] == 1) {
+               passing += 1
+            }
+         }
+      }
+   }
+   return passing
+}
+
 // const output = oddOccurencesInArray([9, 3, 9, 3, 9, 7, 9])
 // const output = minimalJump(10, 85, 30)
 // const output = permMissingElem([2,3,1,5])
@@ -245,7 +266,10 @@ function permCheck(nums) {
 /* const arrayList = [-1, -3] // [1, 2, 3] //[1, 3, 6, 4, 1, 2]
 const output = missingInteger(arrayList) */
 
-const arrayList = [4, 1, 3]  //[4,1,3,2] // [4,1,3] 
-const output = permCheck(arrayList)
+/* const arrayList = [4, 1, 3]  //[4,1,3,2] // [4,1,3] 
+const output = permCheck(arrayList) */
+
+const arrayList = [0,1,0,1,1]  //[4,1,3,2] // [4,1,3] 
+const output = passingCars(arrayList)
 
 console.log(output)
