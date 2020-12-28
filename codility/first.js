@@ -256,6 +256,21 @@ function passingCars(arry) {
    return passing
 }
 
+
+// Lesson 6, Q1: Compute number of distinct values in an array.
+function distinct(arry) {
+   let length = arry.length
+   let lists = []
+
+   for (let i = 0; i < length; i++) {
+      if (!lists.includes(arry[i])) {
+         lists.push(arry[i])
+      }
+   }
+
+   return lists.length
+}
+
 // const output = oddOccurencesInArray([9, 3, 9, 3, 9, 7, 9])
 // const output = minimalJump(10, 85, 30)
 // const output = permMissingElem([2,3,1,5])
@@ -269,7 +284,10 @@ const output = missingInteger(arrayList) */
 /* const arrayList = [4, 1, 3]  //[4,1,3,2] // [4,1,3] 
 const output = permCheck(arrayList) */
 
-const arrayList = [0,1,0,1,1]  //[4,1,3,2] // [4,1,3] 
-const output = passingCars(arrayList)
+/* const arrayList = [0,1,0,1,1]  //[4,1,3,2] // [4,1,3] 
+const output = passingCars(arrayList) */
+
+const arrayList = [2,1,1,2,3,1] //[1,1,1,1,4,5,4,4,4,4,0,-1,0,-2,-1,0]
+const output = distinct(arrayList)
 
 console.log(output)
