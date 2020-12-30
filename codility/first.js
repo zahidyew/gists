@@ -20,6 +20,7 @@ function binaryGap(N) {
             // if flag = false, then its a starting 1
             if (!flag) {
                flag = true
+               counter = 0 //dont count the starting 0s
             } else { // else its a closing 1
                gaps.push(counter) // need to record the number of 0s between the two 1s
                counter = 0 // reset the counter back to zero
@@ -68,8 +69,52 @@ function moveArray(array) {
 
 // Lesson 2, Q2: Find an element in the array that is without a pair
 function oddOccurencesInArray(A) {
-   //let counter = 1
+   let elements = {}
 
+   // this solution is O(n) or O(n^log (n))
+   A.map((item) => {
+      if (!elements[item]) { // if we dont found the item in our object, then add it to the object
+         elements[item] = 1 // this is adding a properties to the object
+      } else {
+         delete elements[item] // else if its a duplicate, delete the item from our object
+      }
+   })
+
+   return parseInt(Object.keys(elements))
+   //return elements
+
+   // below are simply another ways to solve this problem
+   /* A.map((item) => {
+      if (elements[item]) {
+         delete elements[item]
+      } else {
+         elements[item] = 1 // this is adding a properties to the object
+      }
+   }) */
+
+   /* for (let i in A) {
+      elements[A[i]] == true ? delete elements[A[i]] : elements[A[i]] = 1
+   }  */
+
+   /* for (let i in A) {
+      if (elements[A[i]])
+         console.log(elements[A[i]])
+      else {
+         elements[A[i]] = 1 // this is adding a properties to the object
+         console.log(elements[A[i]])
+      }
+         
+   } */
+
+   /* for (let [item, counter] of Object.entries(elements)){
+      if (counter % 2 != 0) {
+         //console.log(item)
+         //return parseInt(item)
+      }
+   } */
+
+   
+   /* // this solution is O(n)^2 as we loop inside a loop. So its quite slow
    for (let i = 0; i < A.length; i++) {
       if (A.length == 1) { // exit loop when there is only 1 element. 
          break
@@ -85,11 +130,8 @@ function oddOccurencesInArray(A) {
             break
          }
       }
-      //console.log('Counter: ' + counter)
-      //counter++
    }
-   return A.toString()
-   //return (A.toString() + ' is unpaired.')
+   return A.toString() */
 }
 
 
@@ -287,7 +329,60 @@ const output = permCheck(arrayList) */
 /* const arrayList = [0,1,0,1,1]  //[4,1,3,2] // [4,1,3] 
 const output = passingCars(arrayList) */
 
-const arrayList = [2,1,1,2,3,1] //[1,1,1,1,4,5,4,4,4,4,0,-1,0,-2,-1,0]
-const output = distinct(arrayList)
+/* const arrayList = [2,1,1,2,3,1] //[1,1,1,1,4,5,4,4,4,4,0,-1,0,-2,-1,0]
+const output = distinct(arrayList) */
+
+const arrayList = [9,3,9,3,9,7,9] //[1,1,1,1,4,5,4,4,4,4,0,-1,0,-2,-1,0]
+const output = oddOccurencesInArray(arrayList)
 
 console.log(output)
+
+/* // Lesson 2, Q2: Find an element in the array that is without a pair
+function oddOccurencesInArray(A) {
+   //let counter = 1
+   let elements = {}
+
+   A.map((item) => {
+      if (elements[item]) {
+         delete elements[item]
+      } else {
+         elements[item] = 1 // this is adding a properties to the object
+      }
+   })
+
+   for (let i in A) {
+      elements[A[i]] == true ? delete elements[A[i]] : elements[A[i]] = 1
+   }
+
+    A.map((item) => {
+      if (!elements[item]) {
+         elements[item] = 1 // this is adding a properties to the object
+         //delete elements[item]
+      } else {
+         delete elements[item]
+         //elements[item] = 1 // this is adding a properties to the object
+      }
+   }) 
+
+   for (let i in A) {
+      if (elements[A[i]])
+         console.log(elements[A[i]])
+      else {
+         elements[A[i]] = 1 // this is adding a properties to the object
+         console.log(elements[A[i]])
+      }
+         
+   }
+
+   //elements['asas'] = 1
+
+   for (let [item, counter] of Object.entries(elements)){
+      if (counter % 2 != 0) {
+         //console.log(item)
+         //return parseInt(item)
+      }
+   }
+   //return parseInt(Object.keys(elements))
+   //return Object.keys(elements)
+   return elements
+} */
