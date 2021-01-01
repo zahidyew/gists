@@ -137,6 +137,19 @@ function oddOccurencesInArray(A) {
 
 // Lesson 3, Q1: Count minimal number of jumps from position X to Y. D is the distance it jumps. 
 function minimalJump(X, Y, D) {
+   // This is both correct and fast. O(1) time complexity
+   let i = Y - X
+   let j = Math.floor(i / D)
+   // let jumps = Math.floor((Y - X) / D) // simplify one liner. We want to know how many jumps it will take to reach Y
+
+   if ((j * D) + X < Y) { // check if the jumps are enough to get to Y. If not, then we need +1 more jump
+      return j + 1
+   } else {
+      return j // else, jumps are already enough to reach Y.
+   }
+
+
+   /* // Correct solution but very slow. Not ideal at all. O(Y-X) time complexity
    let jumps = 0
    let flag = false
 
@@ -150,12 +163,40 @@ function minimalJump(X, Y, D) {
       }
    }
    return jumps
+   */
 }
 
 
 // Lesson 3, Q2: Find the missing element in a given permutation.
 function permMissingElem(A) {
-   if (A.length == 0) {
+   const N = A.length
+   if (N == 0) {
+      return 1
+   }
+
+   return (((N + 1) * ((N + 1) + 1) / 2) - A.reduce((a, b) => { return a + b }))
+
+   /* const length = A.length
+   let flag = false
+
+   if (length == 0) {
+      return 1
+   } 
+
+   for (let i = 1; i <= length; i++) {
+      if (!A.includes(i)) {
+         return i
+      }
+      else {
+         flag = true
+      }
+   }
+
+   if (flag)
+      return A[length - 1] + 1 */
+
+
+   /* if (A.length == 0) {
       return 0
    }
    A = A.sort()
@@ -165,7 +206,7 @@ function permMissingElem(A) {
          return i + 1
       }
    } 
-   return A 
+   return A  */
 
    // another way of solving, this one using algebra
    /* const N = A.length
@@ -176,6 +217,10 @@ function permMissingElem(A) {
 // Lesson 3, Q3: Minimize the value |(A[0] + ... + A[P-1]) - (A[P] + ... + A[N-1])
 function tapeEquilibrium(A) {
    let difference = []
+
+   if (A.length < 2 || A.length > 100000) {
+      return 0
+   }
 
    for (let i = 0; i < A.length - 1; i++) {
       let split1 = A.slice(0, i + 1).reduce((a , b) => a + b)
@@ -190,7 +235,26 @@ function tapeEquilibrium(A) {
 
 // Lesson 4, Q1: Find the earliest time when a frog can jump to the other side of a river.
 function frogRiverOne(X, A) {
-   return A.indexOf(X)
+   let array = []
+
+   if (X > 100000 || A.length > 100000 || X < 1 || A.length < 1) {
+      return 0
+   }
+
+   for (let i = 1; i <= X; i++) {
+      let n = A.indexOf(i)
+
+      if (n == -1)
+         return -1
+      else {
+         array[i - 1] = n
+      }
+   }
+
+   return Math.max(...array)
+
+   
+   // return A.indexOf(X)
    
    /* let canCross = false
    let i = -1
@@ -223,30 +287,66 @@ function frogRiverOne(X, A) {
 
 // Lesson 4, Q2: Calculate the values of counters after applying all alternating operations: increase counter by 1; set value of all counters to current maximum.
 function maxCounters(N, A) {
-   // let counters = Array.from({ length: N }, () => 0);
+   let counters = Array(N).fill(0)
+   let max = 0
+
+   for (let i = 0; i < A.length; i++) {
+      if (A[i] <= N) {
+         counters[A[i] - 1]++
+
+         if (counters[A[i] - 1] > max) {
+            max = counters[A[i] - 1]
+         }
+      }
+      else {
+         //let largest = Math.max(...counters)
+         counters.fill(max)
+      }
+   }
+   return counters
+
+   /* // let counters = Array.from({ length: N }, () => 0);
    let counters = Array(N).fill(0)
 
    for (let i = 0; i < A.length; i++) {
-      /* if (A[i] < 1) {   
-         
-      } */
-      if (A[i] < N) {
+      //if (A[i] < 1) {}
+      if (A[i] <= N) {
          counters[A[i] - 1]++ // -1 as array index starts at 0
       }
       else { // the element is bigger than N, so we have to set all the counters to the largest counter
          let largest = Math.max(...counters)
          counters.fill(largest)
       }
-      /* console.log(A[i])
-      console.log(counters) */
+      //console.log(A[i])
+      //console.log(counters) 
    }
 
-   return counters
+   return counters */
 }
 
 
 // Lesson 4, Q3: Find the smallest positive integer that does not occur in a given sequence.
 function missingInteger(nums) {
+   // my best solution in O(n) or O(N * log(N)) time. 100%
+   if (A.indexOf(1) == -1) {
+      return 1
+   }
+   else {
+      let positive = []
+
+      for (let i = 0; i < A.length; i++) {
+         if (A[i] > 0) {
+            positive[A[i]] = A[i]
+         }
+      }
+
+      for (let i = 1; i <= A.length; i++) {
+         if (!positive[i + 1])
+            return i + 1
+      }
+   }
+
+   /* Correct but in O(N**2) time. So, 100% correctness but 25% performance 
    for (let i = 1; i <= nums.length; i++) {
       // check whether the numbers 1,2,..until nums.length exist in the sequence. If not found, by default i is the answer. So return i
       if (nums.indexOf(i) == -1) {
@@ -257,13 +357,49 @@ function missingInteger(nums) {
          return i + 1
       }
    }
-   return ('something wrong with input given')
+   return ('something wrong with input given') */
+
+
+   /* An example how to solve it in O(n) time
+   var onlyPositiveInt = [];
+   for (var i = 0; i < A.length; i++) {
+      if (A[i] > 0) {
+         onlyPositiveInt[A[i]] = true;
+      }
+   }
+   for (i = 1; i <= onlyPositiveInt.length; i++) {
+      if (!onlyPositiveInt[i]) {
+         return i;
+      }
+   }
+   return 1; */
 }
 
 
 // Lesson 4, Q4: Check whether array A is a permutation.
-function permCheck(nums) {
-   nums = nums.sort()
+function permCheck(A) {
+
+   const length = A.length
+   const sumOfN = (length * (length + 1)) / 2
+   let sum = 0
+   let myarray = []
+
+   for (let i = 0; i < length; i++) {
+      if (myarray[A[i]] == A[i]) {
+         return 0
+      } else {
+         sum = sum + A[i]
+         myarray[A[i]] = A[i]
+      }
+   }
+
+   if (sumOfN - sum != 0) {
+      return 0
+   } else {
+      return 1
+   }
+
+   /* nums = nums.sort()
    let flag 
    
    for (let i = 0; i < nums.length; i++) {
@@ -274,13 +410,32 @@ function permCheck(nums) {
       }
    }
 
-   return flag
+   return flag */
 }
 
 
 // Lesson 5, Q4: Count the number of passing cars on the road
-function passingCars(arry) {
-   let passing = 0
+function passingCars(A) {
+   // write your code in JavaScript (Node.js 8.9.4)
+   const length = A.length
+   const limit = 1000000000
+   let zeros = 0
+   let pairs = 0
+
+   for (let i = 0; i < length; i++) {
+      if (A[i] == 1) {
+         pairs = pairs + zeros
+         if (pairs > limit) {
+            return -1
+         }
+      }
+      else { // if it is 0
+         zeros++
+      }
+   }
+   return pairs
+
+   /* let passing = 0
    const length = arry.length
 
    for (let i = 0; i < length; i++) {
@@ -295,13 +450,27 @@ function passingCars(arry) {
          }
       }
    }
-   return passing
+   return passing */
 }
 
 
 // Lesson 6, Q1: Compute number of distinct values in an array.
 function distinct(arry) {
-   let length = arry.length
+   // write your code in JavaScript (Node.js 8.9.4)
+   const l = A.length
+   let arr = []
+   let d = 0
+
+   for (let i = 0; i < l; i++) {
+      if (arr[A[i]] != 1) {
+         arr[A[i]] = 1
+         d++
+      }
+   }
+
+   return d
+
+   /* let length = arry.length
    let lists = []
 
    for (let i = 0; i < length; i++) {
@@ -310,7 +479,25 @@ function distinct(arry) {
       }
    }
 
-   return lists.length
+   return lists.length */
+}
+
+
+function triangle(A) {
+   const l = A.length
+   A = A.sort((a, b) => a - b)
+
+   if (l < 3) {
+      return 0
+   }
+   else {
+      for (let i = 0; i < l - 2; i++) {
+         if (A[i] > 1 && A[i] + A[i + 1] > A[i + 2]) {
+            return 1
+         }
+      }
+      return 0
+   }
 }
 
 // const output = oddOccurencesInArray([9, 3, 9, 3, 9, 7, 9])
