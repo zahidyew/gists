@@ -8,7 +8,8 @@
     "start": "nodemon ./training/palindrome.js",
     "test": "nodemon reformat.js",
     "train": "nodemon train.js",
-    "codi": "nodemon ./codility/first.js"
+    "codi": "nodemon ./codility/first.js",
+    "codi2": "nodemon ./codility/second.js"
   },
   "keywords": [],
   "author": "",
