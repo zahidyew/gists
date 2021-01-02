@@ -55,59 +55,50 @@ const myarray = [3,4,3,2,3,-1,3,3]
 /* const myarray = [5,5,5,5,5] */
 /* const myarray = [1] */
 const output = dominator(myarray)
-
 console.log(output)
 
 function dominator(A) {
    const length = A.length 
    let stack = []
 
-   if (length == 0) {
-      return -1
-   } 
-   else if (length == 1) {
-      return 0
-   }
-   else {
-      for (let i = 0; i < length; i++) {
-         stack.push(A[i])
+   for (let i = 0; i < length; i++) {
+      stack.push(A[i])
 
-         if (stack.length > 1) {
-            if (stack[stack.length - 1] != stack[stack.length - 2]) {
-               // it is different, then pop the pair by pop() twice 
-               stack.pop()
-               stack.pop()
+      if (stack.length > 1) {
+         if (stack[stack.length - 1] != stack[stack.length - 2]) {
+            // it is different, then pop the pair by pop() twice 
+            stack.pop()
+            stack.pop()
+         }
+         // else it is equivalent, then do nothing
+      }
+   }
+
+   if (stack.length > 0) {
+      const half = length / 2
+      let leader = stack[stack.length - 1]
+      let count = 0
+      let leaderIndex = -1
+      //let leaderIndex = []
+
+      for (let i = 0; i < length; i++) {
+         if (A[i] == leader) {
+            if (leaderIndex == -1) {
+               leaderIndex = i
             }
-            // else it is equivalent, then do nothing
+            //leaderIndex.push(i)
+            count++
          }
       }
 
-      if (stack.length > 0) {
-         const half = length / 2
-         let leader = stack[stack.length - 1]
-         let count = 0
-         let leaderIndex = -1
-         //let leaderIndex = []
-         
-         for (let i = 0; i < length; i++) {
-            if(A[i] == leader) {
-               if (leaderIndex == -1) {
-                  leaderIndex = i 
-               }        
-               //leaderIndex.push(i)
-               count++
-            }
-         }
-
-         if (count > half) {
-            return leaderIndex
-         }
-         else {
-            return -1
-         }
-      } 
+      if (count > half) {
+         return leaderIndex
+      }
       else {
          return -1
       }
+   }
+   else {
+      return -1
    }
 }
