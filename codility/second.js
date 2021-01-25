@@ -284,6 +284,56 @@ const countFactors = (N) => {
    return factors
 }
 
-const num = 24
+/* const num = 24
 const output = countFactors(num)
-console.log(output)
+console.log(output) */
+
+// Find the Greatest Common Divisor of 2 numbers
+function gcd (a,b) {
+   if (a == b) {
+      //console.log(a + ":" + b)
+      return a
+   }
+   if (a > b) {
+      return gcd(a - b, b)
+   }
+   else {
+      return gcd(a, b - a)
+   }
+}
+
+//console.log(gcd(24, 9))
+
+// Find the Lowest Common Multiple of 2 numbers
+function lcm(a, b) {
+   const div = gcd(a,b)
+
+   return (a * b) / div
+}
+
+//console.log(lcm(24, 9))
+
+
+// Lesson 12: There are N chocolates in a circle. Count the number of chocolates you will eat.
+function chocolatesByNumbers(N, M) {
+   if (N === 1) {
+      // there is only 1 chocolate. so you eat only 1
+      return 1
+   }
+   else if (M === 1) {
+      // if you go 1 by 1 then you will eat all the chocolates
+      return N
+   }
+   else {
+      // for any other combinations, you need to find the LCM first
+      // as that is where the 2 numbers intersect (i.e. finding the choc. wrapper)
+      // after finding LCM, simply divide it to know how many chocs you will eat. 
+      const div = gcd(N, M)
+      const mult = (N * M) / div
+      const count = mult / M
+
+      return count
+   }
+} 
+
+console.log(chocolatesByNumbers(10, 4))  //1000000000, 1
