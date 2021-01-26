@@ -336,4 +336,71 @@ function chocolatesByNumbers(N, M) {
    }
 } 
 
-console.log(chocolatesByNumbers(10, 4))  //1000000000, 1
+//console.log(chocolatesByNumbers(10, 4))  //1000000000, 1
+
+
+// Lesson 16: Tie adjacent ropes to achieve the maximum number of ropes of length >= K.
+function tieRopes(K, A) {
+   const len = A.length
+   let sum = 0
+   let n = 0
+
+   for (let i = 0; i < len; i++) {
+      sum = sum + A[i]
+
+      if (sum >= K) {
+         sum = 0
+         n++
+      }
+   }
+   return n
+}
+
+//console.log(tieRopes(4, [1,2,3,4,1,1,3]))
+
+
+// Lesson 16: Find a maximal set of non-overlapping segments.
+/* function maxNonoverlappingSegments(A, B) {
+   const len = A.length
+   let max = 0
+
+   for (let i = 0; i < len; i++) {
+      let n = 1
+      let x = B[i]
+      for (let j = 1; j < len; j++) {
+         if (A[j] > x) {
+            x = B[j]
+            n++
+         }
+      } 
+      if (n > max) {
+         max = n
+      } 
+   }
+   return max
+}
+console.log(maxNonoverlappingSegments([1, 3, 7, 9, 9], [5, 6, 8, 9, 10])) */
+
+// Lesson 16: Find a maximal set of non-overlapping segments.
+/* Given the conditions of the question, the best way to determine whether 2 segments are non-overlapping here is 
+   to check if the start of the next segment(y) is bigger than the previous(x) segment ending. If true, then we take 
+   that segment(y) ending as the new marker and compare it to the next segment... */
+function maxNonoverlappingSegments(A, B) {
+   const len = A.length
+   let nonOverlaps = 1
+   let marker = B[0]
+
+   if (len < 2) {
+      // no need to check for non-overlapping segments if length is < 2, just return its length (1 or 0) directly
+      return len
+   }
+
+   for (let i = 0; i < len - 1; i++) {
+      if (A[i+1] > marker) {
+         marker = B[i+1]
+         nonOverlaps++
+      }
+   }
+   return nonOverlaps
+}
+console.log(maxNonoverlappingSegments([1, 3, 7, 9, 9], [5, 6, 8, 9, 10]))
