@@ -32,6 +32,18 @@ var twoSum = function (nums, target) {
    return 0
 };
 
-console.log(twoSum([3, 2, 4], 6))
+//console.log(twoSum([3, 2, 4], 6))
 
-//testing 
+
+var shuffle = function (nums, n) {
+   let arry = []
+
+   for (let i = 0; i < n; i++) {
+      arry.push(nums[i])
+      arry.push(nums[i + n])
+   }
+
+   return arry
+};
+
+console.log(shuffle([2, 5, 1, 3, 4, 7], 3))
