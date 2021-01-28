@@ -10,7 +10,8 @@
     "train": "nodemon train.js",
     "codi": "nodemon ./codility/first.js",
     "codi2": "nodemon ./codility/second.js",
-    "codi3": "nodemon ./codility/realTest.js"
+    "codi3": "nodemon ./codility/realTest.js",
+    "leet1": "nodemon ./leetCode/leet1.js"
   },
   "keywords": [],
   "author": "",
