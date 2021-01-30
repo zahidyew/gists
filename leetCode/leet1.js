@@ -36,7 +36,7 @@ var twoSum = function (nums, target) {
 
 //console.log(twoSum([3, 2, 4], 6))
 
-// Shuffle the Array 
+// 1470. Shuffle the Array : Return the array in the form [x1,y1,x2,y2,...,xn,yn]
 var shuffle = function (nums, n) {
 	let arry = []
 
@@ -51,7 +51,7 @@ var shuffle = function (nums, n) {
 //console.log(shuffle([2, 5, 1, 3, 4, 7], 3))
 
 
-// Defanging an IP Address
+// 1108. Defanging an IP Address : A defanged IP address replaces every period "." with "[.]"
 var defangIPaddr = function (address) {
 	address = address.replace(/[.]/g, '[.]')
 
@@ -88,7 +88,8 @@ var commonChars = function (A) {
 console.log(commonChars(["bella", "label", "roller"])) */
 
 
-// Find Common Characters
+// 1002. Find Common Characters: return a list of all characters that show up 
+// in all strings within the list (including duplicates)
 var commonChars = function (A) {
 	const letters = A[0].split('')
 	let ans = []
@@ -155,7 +156,7 @@ var dayOfYear = function (date) {
 };
 console.log(dayOfYear("2004-03-01")) */
 
-// Day of the Year
+// 1154. Day of the Year: return the day number of the year.
 var dayOfYear = function (date) {
 	const year = parseInt(date.substring(0, 4))
 	const month = parseInt(date.substring(5, 7))
@@ -199,4 +200,44 @@ var missingNumber = function (nums) {
 	}
 	return nums.length */
 };
-console.log(missingNumber([9, 6, 4, 2, 3, 5, 7, 0, 1]))
+//console.log(missingNumber([9, 6, 4, 2, 3, 5, 7, 0, 1]))
+
+
+// 748. Shortest Completing Word: Return the shortest completing word in words
+var shortestCompletingWord = function (licensePlate, words) {
+	//licensePlate = licensePlate.toLowerCase()
+	words = words.sort((a, b) => a.length - b.length) // sort the words in ASC order to simplify things 
+	const letters = licensePlate.toLowerCase().match(/[a-z]/gi)
+
+	if (letters.length === 1) {
+		// return the shortest word that contains the letter and that appears the earliest
+		return words.find(w => w.includes(letters))
+	}
+	else {
+		let count = Array(words.length).fill(0)
+		let wordsClone = [...words]
+
+		for (let i in words) {
+			for (let j in letters) {
+				if (words[i].includes(letters[j])) {
+					count[i]++
+					words[i] = words[i].replace(letters[j], "")
+				}
+			}
+			if (count[i] === letters.length) {
+				// the word has all the letters, so return it immediately
+				return wordsClone[i]
+			}
+		}
+		// if we cannot find a word that matches all the letters, then find the one that has 
+		// the most matches & also the shortest word
+		return wordsClone[count.indexOf(Math.max(...count))]
+		// return count
+	}
+};
+console.log(shortestCompletingWord("iMSlpe4", words = ["claim", "consumer", "student", "camera", "public", "never", "wonder", "simple", "thought", "use"]))
+// "1s3 456", words = ["looks","pest","stew","show"]
+// "1s3 PSt", ["step", "steps", "stripe", "stepple"]
+// "Ah71752" ["suggest","letter","of","husband","easy","education","drug","prevent","writer","old"]
+// "OgEu755" ["enough", "these", "play", "wide", "wonder", "box", "arrive", "money", "tax", "thus"]
+// "iMSlpe4" ["claim","consumer","student","camera","public","never","wonder","simple","thought","use"]
