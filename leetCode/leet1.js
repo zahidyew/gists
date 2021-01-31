@@ -235,9 +235,128 @@ var shortestCompletingWord = function (licensePlate, words) {
 		// return count
 	}
 };
-console.log(shortestCompletingWord("iMSlpe4", words = ["claim", "consumer", "student", "camera", "public", "never", "wonder", "simple", "thought", "use"]))
+//console.log(shortestCompletingWord("iMSlpe4", words = ["claim", "consumer", "student", "camera", "public", "never", "wonder", "simple", "thought", "use"]))
 // "1s3 456", words = ["looks","pest","stew","show"]
 // "1s3 PSt", ["step", "steps", "stripe", "stepple"]
 // "Ah71752" ["suggest","letter","of","husband","easy","education","drug","prevent","writer","old"]
 // "OgEu755" ["enough", "these", "play", "wide", "wonder", "box", "arrive", "money", "tax", "thus"]
 // "iMSlpe4" ["claim","consumer","student","camera","public","never","wonder","simple","thought","use"]
+
+
+// 696. Count Binary Substrings
+// count the number of non-empty (contiguous) substrings that have the same number of 0's and 1's, and all the 0's and all the 1's in these substrings are grouped consecutively.
+var countBinarySubstrings = function (s) {
+	//2,4, multiples of 2s only
+
+	return s
+};
+//console.log(countBinarySubstrings("00110011"))
+
+
+// 1652. Defuse the Bomb
+var decrypt = function (code, k) {
+	const n = code.length
+
+	if (k === 0) {
+		return code = Array(n).fill(0)
+	}
+	else if (k > 0) {
+		let clone = [...code]
+		let ans = Array(n).fill(0)
+
+		for (let i = 0; i < k; i++) {
+			clone.push(code[i])
+		}
+		
+		for (let i = 0; i < n; i++) {
+			for (let j = i + 1; j <= i + k; j++) {
+				ans[i] = ans[i] + clone[j]
+			}
+		}
+		return ans
+	}
+	else {
+		let clone = []
+		let ans = Array(n).fill(0)
+		k = Math.abs(k)
+
+		for (let i = n - k; i < n; i++) {
+			clone.push(code[i])
+		}
+
+		clone = clone.concat(code)
+
+		for (let i = 0; i < n; i++) {
+			for (let j = i; j < i + k; j++) {
+				ans[i] = ans[i] + clone[j]
+			}
+		}
+		console.log(clone)
+		return ans
+	}
+};
+//console.log(decrypt([2, 4, 9, 3], -3))
+
+
+// 1331. Rank Transform of an Array
+var arrayRankTransform = function (arr) {
+	/* const n = arr.length
+	const set = new Set(arr)
+	let clone = [...set]
+	clone = [...clone.sort((a, b) => a - b)]
+	let ans = []
+
+	for (let i = 0; i < n; i++) {
+		ans[i] = clone.indexOf(arr[i]) + 1
+	}
+
+	return ans */
+
+	let map = new Map() // use Map to map number to its rank (faster than using Object)
+	const set = new Set(arr) // use Set to remove duplicates
+	const sorted = [...set].sort((a, b) => a - b) // sort the numbers in ASC order
+	let ans = []
+
+	// map each number to its respective rank. Rank starts at 1, so i + 1
+	for (let i = 0 ; i < sorted.length; i++) {
+		map.set(sorted[i], i + 1)
+	}
+
+	// assign each number in original array its rank
+	for (let i = 0; i < arr.length; i++) {
+		ans[i] = map.get(arr[i])
+	}
+
+	//console.log(map) //output is: Map { 10 => 1, 20 => 2, 30 => 3, 40 => 4 }
+	return ans
+};
+//console.log(arrayRankTransform([40, 10, 20, 30, 10]))
+
+
+// 1185. Day of the Week
+var dayOfTheWeek = function (day, month, year) {
+	/* const days = new Map([
+		[0, 'Sunday'],
+		[1, 'Monday'],
+		[2, 'Tuesday'],
+		[3, 'Wednesday'],
+		[4, 'Thursday'],
+		[5, 'Friday'],
+		[6, 'Saturday'],
+	])
+	const date = new Date(`${month} ${day}, ${year}`)
+	const myDay = date.getDay()
+
+	return days.get(myDay) */
+
+	const daysInWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+	const date = new Date(`${month} ${day}, ${year}`)
+	const myDay = date.getDay()
+
+	return daysInWeek[myDay]
+
+	/* const daysInWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+
+	return daysInWeek[new Date(`${month} ${day}, ${year}`).getDay()] */
+};
+console.log(dayOfTheWeek(31, 8, 2019))
