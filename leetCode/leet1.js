@@ -359,4 +359,116 @@ var dayOfTheWeek = function (day, month, year) {
 
 	return daysInWeek[new Date(`${month} ${day}, ${year}`).getDay()] */
 };
-console.log(dayOfTheWeek(31, 8, 2019))
+//console.log(dayOfTheWeek(31, 8, 2019))
+
+
+// 1103. Distribute Candies to People
+var distributeCandies = function (candies, num_people) {
+	let ans = Array(num_people).fill(0)
+	let c = 1
+
+	for (let i = 0; i < num_people; i++) {
+		if (c > candies) {
+			// when we have less candies than we should give
+			// give all remaining candies
+			ans[i] = ans[i] + candies
+			candies = 0
+		}
+		else {
+			ans[i] = ans[i] + c
+			candies = candies - c
+		}	
+		
+		if (candies !== 0 && i === num_people - 1) {
+			// reset loop when there are still candies left
+			i = -1
+		}
+		c++
+	}
+	return ans
+};
+//console.log(distributeCandies(10, 3))
+
+
+// 1394. Find Lucky Integer in an Array
+var findLucky = function (arr) {
+	let ans = []
+	const n = arr.length
+	let map = new Map()
+
+	for (let i in arr) {
+		if (!map.has(arr[i])) {
+			map.set(arr[i], 1)
+		}
+		else {
+			let c = map.get(arr[i])
+			map.set(arr[i], ++c)
+		}
+	}
+
+	for (let [key, value] of map) {
+		if (key === value) {
+			ans.push(key)
+		}
+	}
+
+	if (ans.length === 0) {
+		return -1
+	}
+	else {
+		return Math.max(...ans)		
+	}
+};
+//console.log(findLucky([2,2,3,4]))
+
+/* const freq = new Array(500).fill(0)
+arr.forEach(e => { ++freq[e] })
+return freq.reduce((_, e, i) => {
+	if (e === i) return e
+	return _
+}) || -1 */
+
+
+// 1437. Check If All 1's Are at Least Length K Places Away
+var kLengthApart = function (nums, k) {
+	/* let d = 0
+	let start = false
+
+	for (let i in nums) {
+		console.log(i)
+		if (nums[i] === 1) {
+			if (start) {
+				if (d < k) {
+					return false
+				}
+
+				d = 0
+			}
+			else {
+				start = true
+			}
+		}
+		else {
+			d++
+		}
+	}
+
+	return true */
+	
+	let d = k
+
+	for (let i in nums) {
+		if (nums[i] === 1) {
+			if (d < k) {
+				return false
+			}
+			d = 0	
+		}
+		else {
+			d++
+		}
+	}
+	return true
+};
+console.log(kLengthApart([1, 0, 0, 1, 0, 1], 2))
+
