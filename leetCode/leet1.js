@@ -470,5 +470,66 @@ var kLengthApart = function (nums, k) {
 	}
 	return true
 };
-console.log(kLengthApart([1, 0, 0, 1, 0, 1], 2))
+//console.log(kLengthApart([1, 0, 0, 1, 0, 1], 2))
 
+
+// 706. Design HashMap
+class MyHashMap {
+	constructor() {
+		this.data = {}
+	}
+
+	put(key, value) {
+		this.data[key] = value
+	}
+
+	get(key) {
+		if (this.data[key] !== undefined) {
+			return this.data[key]
+		}
+		else {
+			return -1
+		}
+	}
+
+	remove(key) {
+		//this.data[key] = undefined
+		delete this.data[key]
+	}
+}
+/* let hashMap = new MyHashMap();
+hashMap.put(1,1)
+hashMap.put(2,2)
+hashMap.get(1)
+console.log(hashMap)
+console.log(hashMap.remove(2))
+console.log(hashMap) */
+
+
+// 1046. Last Stone Weight
+const lastStoneWeight = (stones) => {
+	while (stones.length > 1) {
+		const max1 = Math.max(...stones)
+		stones.splice(stones.indexOf(max1), 1)
+
+		const max2 = Math.max(...stones)
+		stones.splice(stones.indexOf(max2), 1)
+
+		const diff = max1 - max2
+		if (diff > 0) {
+			stones.push(diff)
+		}
+		//console.log(stones + "\n")
+	}
+	return stones.length === 0 ? 0 : stones[0]
+
+	/* stones.sort((a, b) => b - a);
+
+    if (stones[1] === 0 || stones.length === 1) return stones[0];
+
+    stones[0] = stones[0] - stones[1];
+    stones[1] = 0;
+
+    return lastStoneWeight(stones); */
+};
+console.log(lastStoneWeight([2, 7, 4, 1, 8, 1]))
