@@ -260,4 +260,109 @@ var isPalindrome = function (x) {
 
    return x === rev || x === rev/10
 };
-console.log(isPalindrome(121))
+//console.log(isPalindrome(121))
+
+
+// 13. Roman to Integer
+var romanToInt = function (s) {
+   let ans = 0;
+   const eCases = s.match(/(?:IV|IX|XL|XC|CD|CM)/g)
+   const romans = {
+      "I": 1,
+      "V": 5,
+      "X": 10,
+      "L": 50,
+      "C": 100,
+      "D": 500,
+      "M": 1000,
+      "IV": 4,
+      "IX": 9,
+      "XL": 40,
+      "XC": 90,
+      "CD": 400,
+      "CM": 900,
+   }
+
+   // deal with edge cases in eCases
+   if (eCases !== null) {
+      for (let i = 0; i < eCases.length; i++) {
+         // add up all the captured edge cases & remove it from the string
+         ans = ans + romans[eCases[i]]
+         s = s.replace(eCases[i], "")
+
+         //console.log(ans)
+         //console.log(s)
+      }
+   }
+
+   // add up the all the simple romans
+   s.split("").map(r => {
+      ans = ans + romans[r]
+   })
+
+   return ans
+};
+//console.log(romanToInt('MMXIX'))
+
+
+// 14. Longest Common Prefix
+var longestCommonPrefix = function (strs) {
+   if (strs.length === 0) {
+      return ""
+   }
+
+   let ans = strs[0]
+
+   for (let i = 1; i < strs.length; i++) {
+      while (strs[i].indexOf(ans) !== 0) {
+         ans = ans.substring(0, ans.length - 1)
+         if (ans.length === 0) {
+            return ""
+         }
+      }
+   }
+   return ans
+};
+//console.log(longestCommonPrefix(["flower", "flow", "flight"]))
+
+
+// 26. Remove Duplicates from Sorted Array
+var removeDuplicates = function (nums) {
+   /* const n = nums.length
+   const min = nums[0]
+   const max = nums[n - 1]
+   const l = max - min + 1
+
+   for (let i = 1; i <= l; i++) {
+      nums[i] = nums[i - 1] + 1
+   }
+
+   console.log(nums)
+   return l */
+
+   if (nums.length < 2) {
+      return nums.length
+   }
+
+   let i = 0
+
+   for (let x = 1; x < nums.length; x++) {
+      if (nums[i] !== nums[x]) {
+         i++
+         nums[i] = nums[x]
+      }
+   }
+   return i + 1
+};
+//console.log(removeDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4]))
+
+
+// 27. Remove Element
+var removeElement = function (nums, val) {
+   while (nums.indexOf(val) !== -1) {
+      nums.splice(nums.indexOf(val), 1)
+   }
+   //return nums.length
+   return nums
+};
+console.log(removeElement([3, 2, 2, 3], 3))
