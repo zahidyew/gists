@@ -365,4 +365,108 @@ var removeElement = function (nums, val) {
    //return nums.length
    return nums
 };
-console.log(removeElement([3, 2, 2, 3], 3))
+//console.log(removeElement([3, 2, 2, 3], 3))
+
+
+// 35. Search Insert Position
+var searchInsert = function (nums, target) {
+   // if target is inside the array, return its position immediately
+   if (nums.indexOf(target) !== -1) {
+      return nums.indexOf(target)
+   }
+   // else find where it should be inserted
+   else {
+      const max = Math.max(...nums)
+      const min = Math.min(...nums)
+
+      if (target > max) {
+         // insert at the end
+         return nums.length
+      }
+      else if (target < min) {
+         // insert at the beginning
+         return 0
+      }
+
+      // target belong somewhere in the middle
+      for (let i = 1; i < nums.length; i++) {
+         if (nums[i - 1] < target && nums[i] > target) {
+            return i
+         }
+      }
+   }
+
+   /* for (let i = 0; i < nums.length; i++) {
+
+      if (nums[i] === target || nums[i] > target) return i;
+
+      if (i === (nums.length - 1) && target > nums[i]) return i + 1;
+   } */
+   
+};
+//console.log(searchInsert([1, 3, 5, 6], 2))
+
+
+// 278. First Bad Version
+var solution = function (isBadVersion) {
+   return function (n) {
+      let left = 1
+      let right = n
+
+      // binary search 
+      while (left < right) {
+         let mid = Math.floor(left + (right - left) / 2)
+
+         if (isBadVersion(mid)) {
+            right = mid
+         } else {
+            left = mid + 1
+         }
+         /* console.log("mid " + mid)
+         console.log("n " + n)
+         console.log("right " + right)
+         console.log("left " + left + "\n") */
+      }
+      return left
+   };
+};
+function isBadVersion(n) {
+   const badVersion = 2
+   if (n >= badVersion) {
+      return true
+   } else {
+      return false
+   }
+}
+//console.log(solution(isBadVersion)(10))
+
+
+// 1480. Running Sum of 1d Array
+var runningSum = function (nums) {
+   let sum = [nums[0]]
+
+   if (nums.length > 1) {
+      for (let i = 1; i < nums.length; i++) {
+         sum[i] = sum[i - 1] + nums[i]
+      }
+   }
+   return sum
+};
+console.log(runningSum([3, 1, 2, 10, 1]))
+
+
+// 1672. Richest Customer Wealth
+var maximumWealth = function (accounts) {
+   let max = 0
+
+   for (let i = 0; i < accounts.length; i++) {
+      let wealth = accounts[i].reduce((a, b) => a + b)
+
+      if (wealth > max) {
+         max = wealth
+      }
+   }
+   return max
+
+   //return Math.max(...accounts.map(customer => customer.reduce((a, b) => a + b)))
+};
