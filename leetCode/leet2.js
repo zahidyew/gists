@@ -452,7 +452,7 @@ var runningSum = function (nums) {
    }
    return sum
 };
-console.log(runningSum([3, 1, 2, 10, 1]))
+//console.log(runningSum([3, 1, 2, 10, 1]))
 
 
 // 1672. Richest Customer Wealth
@@ -470,3 +470,66 @@ var maximumWealth = function (accounts) {
 
    //return Math.max(...accounts.map(customer => customer.reduce((a, b) => a + b)))
 };
+
+
+// 771. Jewels and Stones
+var numJewelsInStones = function (jewels, stones) {
+   /* let ans = 0
+
+   ans = jewels.split("").map(jewel => {
+      const myRegex = new RegExp(jewel, "g")
+      return stones.match(myRegex)
+   })
+
+   console.log(ans)
+
+   if (ans.length > 0) {
+      let len = 0
+      for (let i in ans) {
+         len = len + ans[i].length
+      }
+      return len
+   } else {
+      return 0
+   } */
+   
+   //let ans = []
+   let n = 0
+   
+   for (let i in jewels) {
+      const myRegex = new RegExp(jewels[i], "g")
+      const matched = stones.match(myRegex)
+      if (matched !== null) {
+         //ans.push(matched)
+         n = n + matched.length
+      }
+   }
+    
+   return n
+
+   /* let n = 0
+   for (let i = 0; i < stones.length; i++) {
+      if (jewels.indexOf(stones[i]) !== -1) {
+         n++
+      }
+   }
+   return n */
+};
+//console.log(numJewelsInStones("aA", "aAAbbb"))
+
+
+// 1342. Number of Steps to Reduce a Number to Zero
+var numberOfSteps = function (num) {
+   let count = 0
+
+   while (num > 0) {
+      if (num % 2 === 0) {
+         num = num / 2
+      } else {
+         num = num - 1
+      }
+      count++
+   }
+   return count
+};
+console.log(numberOfSteps(14))
