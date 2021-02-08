@@ -532,4 +532,80 @@ var numberOfSteps = function (num) {
    }
    return count
 };
-console.log(numberOfSteps(14))
+//console.log(numberOfSteps(14))
+
+
+// 1313. Decompress Run-Length Encoded List
+var decompressRLElist = function (nums) {
+   let ans = []
+
+   for (let i = 0; i < nums.length; i += 2) {
+      const freq = nums[i]
+      const val = nums[i + 1]
+      ans.push(...new Array(freq).fill(val))
+
+      //for (let j = 0; j < freq; j++) {
+      //ans.push(val)
+      //}
+   }
+   return ans
+};
+
+
+// 242. Valid Anagram
+var isAnagram = function (s, t) {
+   let lettersInS = {}
+   let lettersInT = {}
+
+   s.toLowerCase().split("").map(l => {
+      if (lettersInS[l] > 0) {
+         lettersInS[l]++
+      } else {
+         lettersInS[l] = 1
+      }
+      //console.log(lettersInS[l])
+   })
+
+   t.toLowerCase().split("").map(l => {
+      if (lettersInT[l] > 0) {
+         lettersInT[l]++
+      } else {
+         lettersInT[l] = 1
+      } 
+   })
+
+   console.log(lettersInS)
+   console.log(lettersInT)
+
+   if (Object.keys(lettersInS).length !== Object.keys(lettersInT).length) {
+      return false
+   }
+
+   for (let i in lettersInS) {
+      if (lettersInS[i] !== lettersInT[i]) {
+         return false
+      }
+   }
+   return true
+};
+console.log(isAnagram("evil", "vile"))
+
+
+// 53. Maximum Subarray (Can be solved using Kadane's Algorithm)
+var maxSubArray = function (nums) {
+   let sum = 0
+   let max = Number.MIN_SAFE_INTEGER
+
+   for (let i = 0; i < nums.length; i++) {
+      if (nums[i] > sum + nums[i]) {
+         sum = nums[i]
+      } else {
+         sum = sum + nums[i]
+      }
+      if (sum > max) {
+         max = sum
+      }
+   }
+
+   return max
+};
