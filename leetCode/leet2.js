@@ -588,7 +588,7 @@ var isAnagram = function (s, t) {
    }
    return true
 };
-console.log(isAnagram("evil", "vile"))
+//console.log(isAnagram("evil", "vile"))
 
 
 // 53. Maximum Subarray (Can be solved using Kadane's Algorithm)
@@ -609,3 +609,206 @@ var maxSubArray = function (nums) {
 
    return max
 };
+
+
+// 58. Length of Last Word
+var lengthOfLastWord = function (s) {
+   /* s = s.trim()
+   const lastSpaceIndex = s.lastIndexOf(" ")
+   return s.length - lastSpaceIndex - 1 */
+
+   s = s.trim()
+   return s.length - s.lastIndexOf(" ") - 1
+};
+
+
+// 66. Plus One: Long, complicated & ugly solution using recursion
+/* var plusOne = function (digits) {
+   const n = digits.length
+
+   if (digits[n - 1] + 1 < 10) {
+      digits[n - 1] = digits[n - 1] + 1
+   }
+   else {
+      digits = adding(digits, n - 1)
+   }
+   return digits
+};
+function adding(digits, index) {
+   if (index > -1) {
+      if (digits[index] + 1 > 9) {
+         //digits[n - 1] = 0
+
+         if (digits.length === 1 || index === 0) {
+            digits[index] = 0
+            digits.unshift(1)
+            return digits
+         } else {
+            digits[index] = 0
+            return adding(digits, index - 1)
+         }
+      } else {
+         digits[index] = digits[index] + 1
+         return digits
+      }
+   } else {
+      return digits
+   }
+} */
+// 66. Plus One: Better & more concise solution
+var plusOne = function (digits) {
+   for (let i = digits.length - 1; i > -1; i--) {
+      digits[i]++;
+      if (digits[i] > 9) {
+         // need to add 1 to the next number, continue looping 
+         digits[i] = 0;
+      }
+      else {
+         // stop looping & return digits immediately
+         return digits;
+      }
+   }
+   // if reach here, then need to add 1 to the beginning of the array
+   // eg, [9,9,9] plus one becomes [1,0,0,0]
+   digits.unshift(1);
+   return digits;
+};
+
+
+// 67. Add Binary
+var addBinary = function (a, b) {
+   let addOne = 0
+   let ans = ""
+   let i = a.length - 1
+   let j = b.length - 1
+   
+   while (i > -1 || j > -1 || addOne !== 0) {
+      let sum = 0
+      if (a[i] === undefined && b[j] === undefined) {
+         sum = addOne
+      } else if (a[i] === undefined) {
+         sum = parseInt(b[j]) + addOne
+      } else if (b[j] === undefined) {
+         sum = parseInt(a[i]) + addOne
+      } else {
+         sum = parseInt(a[i]) + parseInt(b[j]) + addOne
+      }
+
+      if (sum > 1) {
+         ans = (sum - 2) + ans // concatenate string
+         addOne = 1
+      } else {
+         ans = sum + ans
+         addOne = 0
+      }
+      //console.log(ans)
+      //console.log(sum)
+      i--
+      j--
+   }
+   return ans
+
+   /*
+   a = `0b${a}`;
+   b = `0b${b}`;
+
+   let sum = BigInt(a) + BigInt(b);
+   console.log(sum)
+
+   return sum.toString(2); // convert to binary\
+   */
+};
+//console.log(addBinary("1010", "1011"))
+
+
+// 1304. Find N Unique Integers Sum up to Zero
+var sumZero = function (n) {
+   let ans = [];
+
+   if (n === 1) {
+      ans.push(0);
+      return ans;
+   }
+
+   if (n % 2 === 0) {
+      ans = fillSumZero(n, true);
+   } else {
+      ans = fillSumZero(n, false);
+   }
+   return ans;
+};
+function fillSumZero(n, isEven) {
+   let ans = [];
+   let num = 1;
+   let start = 0;
+
+   if (!isEven) {
+      start = 1;
+      ans.push(0);
+   }
+   for (let i = start; i < n; i++) {
+      ans.push(num);
+      if (num > 0) {
+         num = num * -1;
+      } else {
+         num = num * -1;
+         num++;
+      }
+   }
+   return ans;
+}
+
+
+//
+var maximum69Number = function (num) {
+   num = num.toString().split("");
+
+   for (let i = 0; i < num.length; i++) {
+      if (num[i] !== '9') {
+         num[i] = '9';
+         break;
+      }
+   }
+   return parseInt(num.join(''));
+};
+//console.log(maximum69Number(9669));
+
+
+// 657. Robot Return to Origin
+var judgeCircle = function (moves) {
+   let posX = 0;
+   let posY = 0;
+
+   for (let m of moves) {
+      //console.log(move)
+      switch (m) {
+         case 'U': posY++; break;
+         case 'D': posY--; break;
+         case 'R': posX++; break;
+         case 'L': posX--; break;
+      }
+   }
+   return posX === 0 && posY === 0;
+};
+//console.log(judgeCircle("RRDD"))
+
+
+// 1365. How Many Numbers Are Smaller Than the Current Number
+var smallerNumbersThanCurrent = function (nums) {
+   let ans = new Array(...nums);
+   let obj = {};
+   ans = ans.sort((a,b) => a - b);
+   //console.log(ans)
+
+   for (let i = 0; i < ans.length; i++) {
+      if (obj[ans[i]] == undefined) {
+         obj[ans[i]] = i;
+      }
+   }
+
+   for (let i = 0; i < nums.length; i++) {
+      ans[i] = obj[nums[i]];
+   }
+   return ans;
+};
+console.log(smallerNumbersThanCurrent([9, 1, 1, 1, 10]));
