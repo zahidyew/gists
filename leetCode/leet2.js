@@ -811,4 +811,120 @@ var smallerNumbersThanCurrent = function (nums) {
    }
    return ans;
 };
-console.log(smallerNumbersThanCurrent([9, 1, 1, 1, 10]));
+//console.log(smallerNumbersThanCurrent([9, 1, 1, 1, 10]));
+
+
+function calculateDaysSince() {
+   let today = new Date();
+   const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+   let date, daysSince;
+
+   date = new Date(2015, 9, 20);
+   daysSince = Math.floor(Math.abs((today - date) / oneDay));
+
+   return daysSince;
+}
+//console.log(calculateDaysSince());
+
+
+// 3. Longest Substring Without Repeating Characters
+var lengthOfLongestSubstring = function(s) {
+    let start = 0;
+    let end = start + 1;
+    let chars = {};
+    let maxLen = 0;
+
+    if (s.length === 0) { return 0; }
+
+    while (end < s.length) {
+        chars[s[start]] = 1;
+
+        if (chars[s[end]] === undefined) {
+            chars[s[end]] = 1;
+            end++;
+        } else {
+            let len = end - start;
+            if (len > maxLen) {
+                maxLen = len;
+            }
+            start = start + 1;
+            end = start + 1;
+            chars = {};
+        }
+        //console.log(chars);
+    }
+    return Math.max(maxLen, end-start);
+
+   /* let hash = new Map();
+   let max = 0;
+   let start = 0;
+   let end = 0;
+
+   // go through s array
+   for (let i = 0; i < s.length; i++) {
+      if (!hash.has(s[i])) {
+         hash.set(s[i], i);
+      } else {
+         start = Math.max(start, hash.get(s[i]) + 1);
+         hash.set(s[i], i);
+      }
+      end++;
+      max = Math.max(max, end - start);
+   }
+   return max; */
+};
+//console.log(lengthOfLongestSubstring("abcabcbb"));
+
+
+// 189. Rotate Array
+var rotate = function (nums, k) {
+   if (k > nums.length - 1) {
+      k = k % nums.length;
+   }
+   if (k === 0) { return; }
+   let arr = [...nums];
+
+   for (let i = 0; i < nums.length; i++) {
+      let swapIndex = (nums.length - k + i) % nums.length;
+      nums[i] = arr[swapIndex];
+      //console.log(nums)
+   }
+
+   /* if (k > nums.length - 1) {
+      k = k % nums.length;
+   }
+   if (k === 0) { return; }
+   let i = 0;
+   let swapIndex = k;
+   let temp = nums[k];
+
+   while (i < nums.length) {
+      if (i === 0) {
+         nums[swapIndex] = nums[0];
+      } else {
+         let swapped = nums[swapIndex];
+         nums[swapIndex] = temp;
+         temp = swapped;
+      }
+      swapIndex = (swapIndex + k) % nums.length;
+      i++;
+      //console.log(nums)
+   } */
+};
+
+
+// 151. Reverse Words in a String
+var reverseWords = function (s) {
+   s = s.trim();
+   let words = s.split(" ");
+   let len = words.length;
+   let reversed = words[len - 1];
+
+   for (let i = len - 2; i > -1; i--) {
+      if (words[i] === '') {
+         continue;
+      }
+      reversed = reversed + " " + words[i];
+   }
+   return reversed;
+};

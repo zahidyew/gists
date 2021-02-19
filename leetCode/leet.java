@@ -390,4 +390,66 @@ class Foo {
         }
         return ans; */
     }
+
+
+    // 3. Longest Substring Without Repeating Characters
+    public int lengthOfLongestSubstring(String s) {
+        HashMap<Character, Integer> hash = new HashMap<>();
+        int start = 0;
+        int end = 0;
+        int maxLen = 0;
+        int len = s.length();
+        
+        if (len == 0) { return 0; }
+        
+        for (int i = 0; i < len; i++) {
+            char c = s.charAt(i);
+            if (hash.get(c) == null) {
+                hash.put(c, i);
+            } else {
+                start = Math.max(start, hash.get(c) + 1);
+                hash.put(c, i);
+            }
+            end++;
+            maxLen = Math.max(maxLen, end - start);
+        }
+        return maxLen;
+    }
+
+
+    // 88. Merge Sorted Array
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        if (n != 0) {
+            int j = 0;
+            for (int i = m; i < nums1.length; i++) {
+                nums1[i] = nums2[j];
+                j++;
+            }
+            Arrays.sort(nums1);
+        }
+        //System.out.println(Arrays.toString(nums1));
+    }
+
+
+    // 169. Majority Element
+    public int majorityElement(int[] nums) {
+        int len = nums.length;
+        int majority = len / 2;
+        int count = 0;
+        HashMap<Integer, Integer> hash = new HashMap<>();
+        
+        for (int i = 0; i < len; i++) {
+            if (hash.get(nums[i]) == null) {
+                hash.put(nums[i], 1);
+            } else {
+                int c = hash.get(nums[i]);
+                hash.put(nums[i], ++c);
+            }
+            if (hash.get(nums[i]) > majority) {
+                return nums[i];
+            }
+            //System.out.println(hash);
+        }
+        return 0;
+    }
 }
