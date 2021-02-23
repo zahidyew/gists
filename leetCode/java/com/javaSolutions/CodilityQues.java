@@ -1,11 +1,13 @@
+package com.javaSolutions;
+
 import java.util.*;
 
 // you can write to stdout for debugging purposes, e.g.
 // System.out.println("this is a debug message");
 
-class Solution {
+class CodilityQues {
    // OddOccurrencesInArray 100% solution O(N)
-    public int solution(int[] A) {
+    public int OddOccurrencesInArray(int[] A) {
         // write your code in Java SE 8
         HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
         int ans = 0;
@@ -30,7 +32,7 @@ class Solution {
     }
 
     // CyclicRotation 100% solution
-    public int[] solution(int[] A, int K) {
+    public int[] CyclicRotation(int[] A, int K) {
         // write your code in Java SE 8
         int len = A.length;
         int[] arr = new int[len];
@@ -52,7 +54,7 @@ class Solution {
     }
 
     // PermMissingElem
-   public int solution(int[] A) {
+   public int PermMissingElem(int[] A) {
         // write your code in Java SE 8
         int n = A.length;
         int sum = 0;
@@ -65,7 +67,7 @@ class Solution {
     }
 
     // TapeEquilibrium 100% solution
-    public int solution(int[] A) {
+    public int TapeEquilibrium(int[] A) {
         int sum = 0;
         int len = A.length;
         int min = Integer.MAX_VALUE;
@@ -91,7 +93,7 @@ class Solution {
     } 
 
     // FrogRiverOne
-    public int solution(int X, int[] A) {
+    public int FrogRiverOne(int X, int[] A) {
         int len = A.length;
         HashMap<Integer, Integer> map = new HashMap<>();
 
@@ -114,7 +116,7 @@ class Solution {
     }
 
     // MaxCounters
-    public int[] solution(int N, int[] A) {
+    public int[] MaxCounters(int N, int[] A) {
         // write your code in Java SE 8
         int len = A.length;
         int[] counter = new int[N];
@@ -153,7 +155,7 @@ class Solution {
     }
 
     // MaxProductOfThree
-    public int solution(int[] A) {
+    public int MaxProductOfThree(int[] A) {
         Arrays.sort(A);
         
         int len = A.length;
@@ -163,7 +165,7 @@ class Solution {
     }
 
     // Brackets
-    public int solution(String S) {
+    public int Brackets(String S) {
         // write your code in Java SE 8
         int len = S.length();
         Stack<Character> stack = new Stack<>();

@@ -2,7 +2,7 @@ package com.javaSolutions;
 
 import java.util.*;
 
-public class Solutions {
+public class LeetcodeQues {
 
    // 169. Majority Element
    public static int majorityElement(int[] nums) {

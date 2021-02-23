@@ -5,7 +5,7 @@ public class Entry {
       /* int[] elems = { 3, 2, 3 };
       int majorityElement = Solutions.majorityElement(elems); */
       int[] nums = {1,1,0,1,1,1};
-      int maxConsecutiveOnes = Solutions.findMaxConsecutiveOnes(nums);
+      int maxConsecutiveOnes = LeetcodeQues.findMaxConsecutiveOnes(nums);
 
       System.out.println("Answer is: " + maxConsecutiveOnes);
    }
