@@ -928,3 +928,4 @@ var reverseWords = function (s) {
    }
    return reversed;
 };
+console.log(reverseWords("  Bob    Loves  Alice   "))
