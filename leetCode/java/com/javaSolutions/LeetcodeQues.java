@@ -544,4 +544,32 @@ public class LeetcodeQues {
       }
       return reversed;
    }
+
+   // 104. Maximum Depth of Binary Tree
+   public int maxDepth(TreeNode root) {
+      if (root == null) {
+         return 0;
+      }
+
+      int leftDepth = maxDepth(root.left);
+      int rightDepth = maxDepth(root.right);
+      int max = Math.max(leftDepth, rightDepth) + 1;
+
+      return max;
+   }
+
+   // 226. Invert Binary Tree
+   public TreeNode invertTree(TreeNode root) {
+      if (root == null) { return root; }
+      
+      // recursion to traverse tree 
+      TreeNode leftSide = invertTree(root.left);
+      TreeNode rightSide = invertTree(root.right);
+      
+      // swap left & right
+      root.left = rightSide;
+      root.right = leftSide;
+      
+      return root;
+    }
 }
