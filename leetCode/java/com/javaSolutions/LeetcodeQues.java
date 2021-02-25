@@ -418,5 +418,130 @@ public class LeetcodeQues {
       // System.out.println(Arrays.toString(nums1));
    }
 
-   
+   // 141. Linked List Cycle
+   public boolean hasCycle(ListNode head) {
+      if (head == null)
+         return false;
+      ListNode fast = head; // fast will move 2 nodes at a time
+      ListNode slow = head; // slow will move 1 node at a time
+
+      // if slow and fast ever meets, then there is a cycle
+      // else both will simply reach null
+      while (fast != null && fast.next != null && slow != null) {
+         fast = fast.next.next; // fast moves 2 nodes at a time
+         slow = slow.next;
+         if (fast == slow) {
+            return true;
+         }
+      }
+      // reach here only if one reach null, meaning no cycle.
+      return false;
+   }
+
+   // 876. Middle of the Linked List
+   public ListNode middleNode(ListNode head) {
+      int len = 0, pos = 0, mid;
+      ListNode clone = head;
+
+      // get the length of the ListNode
+      while (clone != null) {
+         len++;
+         clone = clone.next;
+      }
+      mid = len / 2 + 1; // get the midpoint
+
+      // traverse until reach midpoint
+      while (head != null) {
+         pos++;
+         if (pos == mid) {
+            break; // stop at midpoint, return the ListNode
+         }
+         head = head.next;
+      }
+      return head;
+
+      // Alternative better solution
+      /* ListNode fast = head;
+      ListNode slow = head;
+
+      while (fast != null && fast.next != null) {
+         fast = fast.next.next;
+         slow = slow.next;
+      }
+      return slow; */
+   }
+
+   // 237. Delete Node in a Linked List
+   public void deleteNode(ListNode node) {
+      if (node.next != null) {
+         node.val = node.next.val;
+      }
+      node.next = node.next.next;
+   }
+
+   // 203. Remove Linked List Elements
+   public ListNode removeElements(ListNode head, int val) {
+      if (head == null)
+         return head;
+
+      ListNode list = head; // shallow copy
+
+      while (list.next != null) {
+         if (list.next.val == val) {
+            // System.out.println(head.next.val);
+            list.next = list.next.next;
+         } else {
+            list = list.next;
+         }
+      }
+
+      if (head.val == val) {
+         head = head.next;
+      }
+      return head;
+   }
+
+   // 21. Merge Two Sorted Lists
+   public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+      ListNode dummy = new ListNode(0); // 0 -> null
+      ListNode l3 = dummy;
+
+      while (l1 != null && l2 != null) {
+         if (l1.val <= l2.val) {
+            l3.next = l1;
+            l1 = l1.next;
+         } else {
+            l3.next = l2;
+            l2 = l2.next;
+         }
+         l3 = l3.next;
+      }
+
+      // copy the remaining nodes, since l1 or l2 could finish first
+      if (l1 != null) {
+         l3.next = l1;
+      }
+      if (l2 != null) {
+         l3.next = l2;
+      }
+      return dummy.next;
+   }
+
+   // 206. Reverse Linked List
+   public ListNode reverseList(ListNode head) {
+      if (head == null) {
+         return head;
+      }
+
+      ListNode reversed = null;
+      ListNode next;
+
+      while (head != null) {
+         next = head.next; // 1st run, save 2->3->4->5. 2nd run, save 3->4->5.
+         head.next = reversed; // 1st run, 1->null. 2nd run, 2->1->null.
+         reversed = head; // 1st run, 1->null. 2nd run, 2->1->null.
+         head = next; // 1st run, 2->3->4->5. 2nd run, 3->4->5.
+      }
+      return reversed;
+   }
 }
