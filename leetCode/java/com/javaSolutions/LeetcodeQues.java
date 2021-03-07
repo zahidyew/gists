@@ -572,4 +572,77 @@ public class LeetcodeQues {
       
       return root;
     }
+
+    // 704. Binary Search
+    public int search(int[] nums, int target) {
+       int left = 0;
+       int right = nums.length - 1;
+       int mid = left + (right - left) / 2;
+
+       while (left <= right) {
+          if (target == nums[mid]) {
+             return mid;
+          }
+          if (target > nums[mid]) {
+             left = mid + 1;
+          } else {
+             right = mid - 1;
+          }
+          mid = left + (right - left) / 2;
+       }
+       return -1;
+    }
+
+    // 1. Two Sum
+    public int[] twoSum(int[] nums, int target) {
+       Map<Integer, Integer> map = new HashMap<>();
+
+       for (int i = 0; i < nums.length; i++) {
+          int diff = target - nums[i];
+          if (map.get(diff) != null) {
+             return new int[] { i, map.get(diff) };
+          }
+          map.put(nums[i], i);
+       }
+       return new int[] { -1, -1 };
+    }
+
+    // 561. Array Partition I
+    public int arrayPairSum(int[] nums) {
+       // int pairs = nums.length / 2;
+       int ans = 0;
+       Arrays.sort(nums);
+
+       for (int i = 0; i < nums.length; i += 2) {
+          ans = ans + nums[i];
+       }
+
+       return ans;
+    }
+
+    // 167. Two Sum II - Input array is sorted
+    public int[] twoSumII(int[] numbers, int target) {
+        /*HashMap<Integer, Integer> map = new HashMap<>();
+        int[] ans = {0,0};
+
+        for (int i = 0; i < numbers.length; i++) {
+            int diff = target - numbers[i];
+            if (map.get(diff) != null && map.get(diff) != i) {
+                ans[0] = map.get(diff) + 1;
+                ans[1] = i + 1;
+                break;
+            }
+            map.put(numbers[i], i);
+        }
+        return ans; */
+        
+        int left = 0;
+        int right = numbers.length - 1;
+        
+        while (numbers[left] + numbers[right] != target) {
+            if (numbers[left] + numbers[right] > target) { right--; }
+            else { left++; }
+        }
+        return new int[] {left + 1, right + 1};
+    }
 }

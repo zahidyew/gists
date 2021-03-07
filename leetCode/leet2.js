@@ -929,3 +929,52 @@ var reverseWords = function (s) {
    return reversed;
 };
 console.log(reverseWords("  Bob    Loves  Alice   "))
+
+
+/* - Given an array of integers and a target integer, return true if the array contains 2 integers that sum up to target
+Input: [3, 2, 1, 4, 5, 6], target = 10
+Output: true
+
+function sum(input, target) {
+	let obj = {};
+
+  for (int i = 0; i < input.length; i++) {
+  	obj[input[i]] = input[i]
+  }
+
+	for (int i = 0; i < input.length; i++) {
+		int diff = target - input[i];
+    if (obj[diff] != null &&) {
+    	return iftrue;
+    }
+  }
+  return false;
+
+  // array
+
+}
+
+
+class Node {
+	int value
+  Node next?
+}
+
+1-2-3-4-5
+5-4-3-2-1- null
+function reverse(Node head) {
+	if (head == null) return head;
+
+  Node reversed = null;
+  Node next;
+
+  while(head != null) {
+  	next = head.next; //3-4-5
+    head.next = reversed // 2-1-null
+    reversed = head; //2-1-null
+    head = next; // 3-4-5
+  }
+  return reversed; //5-4-3
+}
+
+ */
