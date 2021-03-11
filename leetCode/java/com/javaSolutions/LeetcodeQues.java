@@ -23,7 +23,7 @@ public class LeetcodeQues {
          // System.out.println(hash);
       }
       return 0;
-   } 
+   }
 
    // 485. Max Consecutive Ones
    public static int findMaxConsecutiveOnes(int[] nums) {
@@ -77,6 +77,7 @@ public class LeetcodeQues {
       }
       return binary;
    }
+
    public int hammingDistance(int x, int y) {
       String xBinary = Integer.toBinaryString(x);
       String yBinary = Integer.toBinaryString(y);
@@ -139,11 +140,12 @@ public class LeetcodeQues {
       }
       return start;
    }
+
    public boolean isBadVersion(int ver) {
       // placeholder func to get rid of errors
       // this func is specified in Leetcode
       return true;
-   } 
+   }
 
    // 1323. Maximum 69 Number
    public int maximum69Number(int num) {
@@ -190,18 +192,18 @@ public class LeetcodeQues {
        */
       for (char c : moves.toCharArray()) {
          switch (c) {
-            case 'U':
-               posX++;
-               break;
-            case 'D':
-               posX--;
-               break;
-            case 'R':
-               posY++;
-               break;
-            case 'L':
-               posY--;
-               break;
+         case 'U':
+            posX++;
+            break;
+         case 'D':
+            posX--;
+            break;
+         case 'R':
+            posY++;
+            break;
+         case 'L':
+            posY--;
+            break;
          }
       }
       return posX == 0 && posY == 0;
@@ -461,14 +463,12 @@ public class LeetcodeQues {
       return head;
 
       // Alternative better solution
-      /* ListNode fast = head;
-      ListNode slow = head;
-
-      while (fast != null && fast.next != null) {
-         fast = fast.next.next;
-         slow = slow.next;
-      }
-      return slow; */
+      /*
+       * ListNode fast = head; ListNode slow = head;
+       * 
+       * while (fast != null && fast.next != null) { fast = fast.next.next; slow =
+       * slow.next; } return slow;
+       */
    }
 
    // 237. Delete Node in a Linked List
@@ -560,89 +560,103 @@ public class LeetcodeQues {
 
    // 226. Invert Binary Tree
    public TreeNode invertTree(TreeNode root) {
-      if (root == null) { return root; }
-      
-      // recursion to traverse tree 
+      if (root == null) {
+         return root;
+      }
+
+      // recursion to traverse tree
       TreeNode leftSide = invertTree(root.left);
       TreeNode rightSide = invertTree(root.right);
-      
+
       // swap left & right
       root.left = rightSide;
       root.right = leftSide;
-      
+
       return root;
-    }
+   }
 
-    // 704. Binary Search
-    public int search(int[] nums, int target) {
-       int left = 0;
-       int right = nums.length - 1;
-       int mid = left + (right - left) / 2;
+   // 704. Binary Search
+   public int search(int[] nums, int target) {
+      int left = 0;
+      int right = nums.length - 1;
+      int mid = left + (right - left) / 2;
 
-       while (left <= right) {
-          if (target == nums[mid]) {
-             return mid;
-          }
-          if (target > nums[mid]) {
-             left = mid + 1;
-          } else {
-             right = mid - 1;
-          }
-          mid = left + (right - left) / 2;
-       }
-       return -1;
-    }
+      while (left <= right) {
+         if (target == nums[mid]) {
+            return mid;
+         }
+         if (target > nums[mid]) {
+            left = mid + 1;
+         } else {
+            right = mid - 1;
+         }
+         mid = left + (right - left) / 2;
+      }
+      return -1;
+   }
 
-    // 1. Two Sum
-    public int[] twoSum(int[] nums, int target) {
-       Map<Integer, Integer> map = new HashMap<>();
+   // 1. Two Sum
+   public int[] twoSum(int[] nums, int target) {
+      Map<Integer, Integer> map = new HashMap<>();
 
-       for (int i = 0; i < nums.length; i++) {
-          int diff = target - nums[i];
-          if (map.get(diff) != null) {
-             return new int[] { i, map.get(diff) };
-          }
-          map.put(nums[i], i);
-       }
-       return new int[] { -1, -1 };
-    }
+      for (int i = 0; i < nums.length; i++) {
+         int diff = target - nums[i];
+         if (map.get(diff) != null) {
+            return new int[] { i, map.get(diff) };
+         }
+         map.put(nums[i], i);
+      }
+      return new int[] { -1, -1 };
+   }
 
-    // 561. Array Partition I
-    public int arrayPairSum(int[] nums) {
-       // int pairs = nums.length / 2;
-       int ans = 0;
-       Arrays.sort(nums);
+   // 561. Array Partition I
+   public int arrayPairSum(int[] nums) {
+      // int pairs = nums.length / 2;
+      int ans = 0;
+      Arrays.sort(nums);
 
-       for (int i = 0; i < nums.length; i += 2) {
-          ans = ans + nums[i];
-       }
+      for (int i = 0; i < nums.length; i += 2) {
+         ans = ans + nums[i];
+      }
 
-       return ans;
-    }
+      return ans;
+   }
 
-    // 167. Two Sum II - Input array is sorted
-    public int[] twoSumII(int[] numbers, int target) {
-        /*HashMap<Integer, Integer> map = new HashMap<>();
-        int[] ans = {0,0};
+   // 167. Two Sum II - Input array is sorted
+   public int[] twoSumII(int[] numbers, int target) {
+      /*
+       * HashMap<Integer, Integer> map = new HashMap<>(); int[] ans = {0,0};
+       * 
+       * for (int i = 0; i < numbers.length; i++) { int diff = target - numbers[i]; if
+       * (map.get(diff) != null && map.get(diff) != i) { ans[0] = map.get(diff) + 1;
+       * ans[1] = i + 1; break; } map.put(numbers[i], i); } return ans;
+       */
 
-        for (int i = 0; i < numbers.length; i++) {
-            int diff = target - numbers[i];
-            if (map.get(diff) != null && map.get(diff) != i) {
-                ans[0] = map.get(diff) + 1;
-                ans[1] = i + 1;
-                break;
-            }
-            map.put(numbers[i], i);
-        }
-        return ans; */
-        
-        int left = 0;
-        int right = numbers.length - 1;
-        
-        while (numbers[left] + numbers[right] != target) {
-            if (numbers[left] + numbers[right] > target) { right--; }
-            else { left++; }
-        }
-        return new int[] {left + 1, right + 1};
-    }
+      int left = 0;
+      int right = numbers.length - 1;
+
+      while (numbers[left] + numbers[right] != target) {
+         if (numbers[left] + numbers[right] > target) {
+            right--;
+         } else {
+            left++;
+         }
+      }
+      return new int[] { left + 1, right + 1 };
+   }
+
+   // 258. Add Digits
+   public int addDigits(int num) {
+      if (num < 10)
+         return num;
+
+      String[] numbers = Integer.toString(num).split("");
+      int sum = 0;
+      int ans;
+      for (int i = 0; i < numbers.length; i++) {
+         sum = sum + Integer.parseInt(numbers[i]);
+      }
+      ans = addDigits(sum);
+      return ans;
+   }
 }
