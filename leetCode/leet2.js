@@ -928,7 +928,79 @@ var reverseWords = function (s) {
    }
    return reversed;
 };
-console.log(reverseWords("  Bob    Loves  Alice   "));
+//console.log(reverseWords("  Bob    Loves  Alice   "));
+
+
+// 977. Squares of a Sorted Array
+var sortedSquares = function (nums) {
+   for (let i = 0; i < nums.length; i++) {
+      nums[i] = nums[i] * nums[i];
+   }
+   return nums.sort((a, b) => a - b);
+};
+
+/*var sortedSquares = function(nums) {
+    let left = 0;
+    let right = nums.length - 1;
+
+    const result = new Array(nums.length);
+
+    for (let i = nums.length - 1; i >= 0; i--) {
+        const leftVal = Math.abs(nums[left]);
+        const rightVal = Math.abs(nums[right]);
+
+        if(leftVal > rightVal) {
+            result[i] = leftVal * leftVal;
+            left++;
+        } else {
+            result[i] = rightVal * rightVal;
+            right--;
+        }
+    }
+    return result;
+};*/
+
+
+// 1160. Find Words That Can Be Formed by Characters
+var countCharacters = function (words, chars) {
+   const map = new Map();
+   let ans = 0;
+
+   for (let i = 0; i < chars.length; i++) {
+      if (map.get(chars[i]) > 0) {
+         let num = map.get(chars[i]);
+         map.set(chars[i], ++num);
+      } else {
+         map.set(chars[i], 1);
+      }
+   }
+
+   words.forEach((item) => {
+      const letters = new Map();
+      let flag = false;
+
+      for (let i = 0; i < item.length; i++) {
+         if (letters.get(item[i]) > 0) {
+            let num = letters.get(item[i]);
+            letters.set(item[i], ++num);
+         } else {
+            letters.set(item[i], 1);
+         }
+      }
+
+      for (let [key, value] of letters) {
+         if (map.get(key) < value || map.get(key) == undefined) {
+            flag = true;
+            break;
+         }
+      }
+      if (!flag) {
+         ans = ans + item.length;
+      }
+   });
+   return ans;
+};
+console.log(countCharacters(["cat", "bt", "hat", "tree"], "atach"));
 
 
 /* - Given an array of integers and a target integer, return true if the array contains 2 integers that sum up to target
