@@ -12,7 +12,8 @@
     "codi2": "nodemon ./codility/second.js",
     "codi3": "nodemon ./codility/realTest.js",
     "leet1": "nodemon ./leetCode/leet1.js",
-    "leet2": "nodemon ./leetCode/leet2.js"
+    "leet2": "nodemon ./leetCode/leet2.js",
+    "leet3": "nodemon ./leetCode/leet3.js"
   },
   "keywords": [],
   "author": "",
