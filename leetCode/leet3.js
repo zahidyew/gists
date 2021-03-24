@@ -64,3 +64,17 @@ var arrayStringsAreEqual = function (word1, word2) {
    //return word1.join('') === word2.join('')
 };
 console.log(arrayStringsAreEqual(["abc", "d", "defg"], ["abcddefg"]));
+
+
+// 1290. Convert Binary Number in a Linked List to Integer
+var getDecimalValue = function (head) {
+   if (head === null) return head;
+   let binary = "";
+
+   while (head != null) {
+      binary = binary + head.val;
+      head = head.next;
+   }
+   //console.log(binary);
+   return parseInt(binary, 2);
+};
