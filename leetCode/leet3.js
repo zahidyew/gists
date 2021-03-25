@@ -78,3 +78,39 @@ var getDecimalValue = function (head) {
    //console.log(binary);
    return parseInt(binary, 2);
 };
+
+
+// 1688. Count of Matches in Tournament
+var numberOfMatches = function (n) {
+   //return n - 1;
+
+   if (n < 2) { return 0; }
+   let matches = 0;
+
+   while (n !== 1) {
+      if (n % 2 === 0) {
+         matches = matches + (n / 2);
+         n = n / 2;
+      } else {
+         matches = matches + ((n - 1) / 2);
+         n = (n + 1) / 2;
+      }
+
+   }
+   return matches;
+};
+
+
+// 1732. Find the Highest Altitude
+var largestAltitude = function (gain) {
+   let currentAlt = 0;
+   let largest = 0;
+
+   for (let i = 0; i < gain.length; i++) {
+      currentAlt = currentAlt + gain[i];
+      if (currentAlt > largest) {
+         largest = currentAlt;
+      }
+   }
+   return largest;
+};
