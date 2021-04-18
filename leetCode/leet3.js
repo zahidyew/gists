@@ -114,3 +114,36 @@ var largestAltitude = function (gain) {
    }
    return largest;
 };
+
+
+// 1816. Truncate Sentence
+var truncateSentence = function (s, k) {
+   let words = s.split(" ");
+   let ans = "";
+
+   //console.log(words);
+
+   for (let i = 0; i < k; i++) {
+      ans = ans + words[i] + " ";
+   }
+   return ans.trim();
+
+   // return s.split(' ').slice(0, k).join(' ')
+};
+
+
+// 1716. Calculate Money in Leetcode Bank
+var totalMoney = function (n) {
+   let savings = 0;
+   let moneyIn = 1;
+
+   for (let i = 0; i < n; i++) {
+      if (i != 0 && i % 7 == 0) {
+         moneyIn = moneyIn - 6;
+      }
+      //console.log(moneyIn)
+      savings = savings + moneyIn;
+      moneyIn++;
+   }
+   return savings;
+};
